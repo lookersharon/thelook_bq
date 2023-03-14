@@ -29,6 +29,11 @@ view: users {
     sql: concat(${first_name}, ' ', ${last_name}) ;;
   }
 
+  dimension: name_secure {
+    sql: ${name};;
+    required_access_grants: [can_see_sensitive_data]
+  }
+
   dimension: age {
     label: "Age"
     type: number

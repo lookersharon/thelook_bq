@@ -14,6 +14,10 @@ datagroup: ecommerce_etl {
 persist_with: ecommerce_etl
 ############ Base Explores #############
 
+access_grant: can_see_sensitive_data {
+  user_attribute: can_see_sensitive_data
+  allowed_values: ["Yes"]
+}
 
 explore: order_items {
   label: "(1) Orders, Items and Users"
