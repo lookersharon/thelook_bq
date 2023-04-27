@@ -179,7 +179,12 @@ view: order_items {
   dimension_group: delivered {
     type: time
     timeframes: [date, week, month, raw]
-    sql: CAST(${TABLE}.delivered_at AS TIMESTAMP) ;;
+    sql:
+
+
+    CAST(${TABLE}.delivered_at AS TIMESTAMP)
+
+    ;;
 
   }
 
@@ -481,6 +486,20 @@ view: order_items {
 #     hidden: yes
 #     sql: ${cohort_values_0} + ${cohort_values_1} ;;
 #   }
+
+### interesting sisu fields
+dimension: discount{
+  sql: ABS(1-(${sale_price}-${products.retail_price})/nullif(${products.retail_price},0)) ;;
+  type: bin
+  tiers: [0,5,10,20,30,50,100]
+  style: integer
+}
+
+dimension: has_discount {
+  type: yesno
+  sql: ${sale_price}-${products.retail_price}<>0 ;;
+}
+
 
 ########## Sets ##########
 
