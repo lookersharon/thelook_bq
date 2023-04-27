@@ -178,7 +178,7 @@ view: order_items {
 
   dimension_group: delivered {
     type: time
-    timeframes: [date, week, month, raw]
+    timeframes: [date, week, month, time, raw]
     sql:
 
 
