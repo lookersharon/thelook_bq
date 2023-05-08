@@ -28,6 +28,7 @@ view: last_year_sales {
       END AS users_age_tier,
           users.city  AS users_city,
           users.traffic_source  AS users_traffic_source,
+          ROW() as pk,
           LOWER(SUBSTR(users.gender,1,1))  AS users_gender_short,
           COUNT(DISTINCT order_items.order_id ) AS order_items_order_count,
           COALESCE(SUM(order_items.sale_price ), 0) AS order_items_total_sale_price
@@ -52,7 +53,7 @@ view: last_year_sales {
   dimension: pk
 {
   primary_key: yes
-  sql: ${products_sku} ;;
+  sql: ${pk}||${products_sku}||${users_city}||${users_age_tier}||${users_traffic_source} ;;
 }
 
   dimension: products_sku {
