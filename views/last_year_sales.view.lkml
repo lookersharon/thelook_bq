@@ -1,6 +1,7 @@
 view: last_year_sales {
   derived_table: {
     sql: SELECT
+        order_items.created_at,
           products.sku  AS products_sku,
           CASE
       WHEN users.age  < 0 THEN '0'
@@ -41,10 +42,16 @@ view: last_year_sales {
           2,
           3,
           4,
-          5,
-           7
+          5,6
+           ,8
        ;;
   }
+
+dimension_group: created_at {
+  type: time
+  timeframes: [date,year]
+  sql: ${TABLE}.created_at ;;
+}
 
   measure: count {
     type: count
@@ -69,19 +76,19 @@ view: last_year_sales {
   }
 
   dimension: users_age_tier {
-    hidden: yes
+    # hidden: yes
     type: string
     sql: ${TABLE}.users_age_tier ;;
   }
 
   dimension: users_city {
-    hidden: yes
+    # hidden: yes
     type: string
     sql: ${TABLE}.users_city ;;
   }
 
   dimension: users_traffic_source {
-    hidden: yes
+    # hidden: yes
     type: string
     sql: ${TABLE}.users_traffic_source ;;
   }
@@ -91,7 +98,10 @@ view: last_year_sales {
     type: string
     sql: ${TABLE}.users_gender_short ;;
   }
-
+measure: total_sales {
+type: sum
+sql: ${order_items_total_sale_price} ;;
+}
   dimension: order_items_order_count {
     # hidden: yes
     type: number
@@ -104,10 +114,16 @@ view: last_year_sales {
     sql: ${TABLE}.order_items_total_sale_price ;;
   }
 
-  measure: growth_rate {
+  measure: sum_growth_rate {
     type: sum
-    value_format_name: percent_0
-    sql: ${order_items_total_sale_price}+${last_year_sales.order_items_total_sale_price} ;;
+    # value_format_name: percent_0
+    sql: (${order_items_total_sale_price}-${last_year_sales.order_items_total_sale_price})/${last_year_sales.order_items_total_sale_price} ;;
+  }
+
+  measure: growth_rate {
+    type: average
+    # value_format_name: percent_0
+    sql: (${order_items_total_sale_price}-${last_year_sales.order_items_total_sale_price})/${last_year_sales.order_items_total_sale_price} ;;
   }
 
   set: detail {

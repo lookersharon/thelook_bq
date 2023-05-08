@@ -80,14 +80,14 @@ explore: order_items {
 
 
 
-  join: last_year_sales {
-    sql_on: ${last_year_sales.products_sku} = ${products.sku}
-AND ${last_year_sales.users_city} = ${users.city}
-AND ${last_year_sales.users_age_tier} = ${users.age_tier}
-AND ${last_year_sales.users_gender_short} = ${users.gender_short}
-AND ${last_year_sales.users_traffic_source} = ${users.traffic_source};;
-type: left_outer
-relationship: one_to_one
+#   join: last_year_sales {
+#     sql_on: ${last_year_sales.products_sku} = ${products.sku}
+# AND ${last_year_sales.users_city} = ${users.city}
+# AND ${last_year_sales.users_age_tier} = ${users.age_tier}
+# AND ${last_year_sales.users_gender_short} = ${users.gender_short}
+# AND ${last_year_sales.users_traffic_source} = ${users.traffic_source};;
+# type: left_outer
+# relationship: one_to_one
 
   }
   #roll up table for commonly used queries
@@ -101,12 +101,24 @@ relationship: one_to_one
   #     datagroup_trigger: ecommerce_etl
   #   }
   # }
+#}
+
+
+explore: last_year_sales {
+  join: this_year_sales {
+    from: last_year_sales
+    sql_on: ${last_year_sales.products_sku} =${this_year_sales.products_sku}
+AND ${last_year_sales.users_city} = ${this_year_sales.users_city}
+AND ${last_year_sales.users_age_tier} = ${this_year_sales.users_age_tier}
+AND ${last_year_sales.users_gender_short} = ${this_year_sales.users_gender_short}
+AND ${last_year_sales.users_traffic_source} =${this_year_sales.users_traffic_source}
+AND ${last_year_sales.created_at_year} = ${this_year_sales.created_at_year};;
+type: left_outer
+relationship: one_to_one
+
 }
 
-
-
-
-
+}
 
 #########  Event Data Explores #########
 
