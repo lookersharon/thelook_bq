@@ -53,7 +53,7 @@ view: last_year_sales {
   dimension: pk
 {
   primary_key: yes
-  sql: ${pk}||${products_sku}||${users_city}||${users_age_tier}||${users_traffic_source} ;;
+  sql: ${TABLE}.pk||${products_sku}||${users_city}||${users_age_tier}||${users_traffic_source} ;;
 }
 
   dimension: products_sku {
