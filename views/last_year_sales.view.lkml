@@ -52,6 +52,11 @@ dimension_group: created_at {
   timeframes: [date,year]
   sql: ${TABLE}.created_at ;;
 }
+  dimension_group: created_at_last_year {
+    type: time
+    timeframes: [date,year]
+    sql: DATE_ADD(${TABLE}.created_at , INTERVAL 1 YEAR);;
+  }
 
   measure: count {
     type: count
