@@ -47,15 +47,13 @@ view: last_year_sales {
        ;;
   }
 
-dimension_group: created_at {
-  type: time
-  timeframes: [date,year]
-  sql: ${TABLE}.created_at ;;
+dimension: created_at_year {
+  type: string
+  sql: DATE_TRUNC(${TABLE}.created_at,YEAR) ;;
 }
-  dimension_group: created_at_last_year {
-    type: time
-    timeframes: [date,year]
-    sql: DATE_ADD(${TABLE}.created_at , INTERVAL 1 YEAR);;
+  dimension: created_at_last_year {
+    type: string
+    sql: DATE_TRUNC(${TABLE}.created_at, YEAR)+1;;
   }
 
   measure: count {
