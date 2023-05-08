@@ -87,7 +87,7 @@ AND ${last_year_sales.users_age_tier} = ${users.age_tier}
 AND ${last_year_sales.users_gender_short} = ${users.gender_short}
 AND ${last_year_sales.users_traffic_source} = ${users.traffic_source};;
 type: left_outer
-relationship: many_to_one
+relationship: one_to_one
 
   }
   #roll up table for commonly used queries
