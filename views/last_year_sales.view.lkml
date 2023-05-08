@@ -49,6 +49,10 @@ view: last_year_sales {
     type: count
     drill_fields: [detail*]
   }
+  dimension: pk
+{
+  sql: ${products_sku}+${users_city}+${users_age_tier}+${users_traffic_source} ;;
+}
 
   dimension: products_sku {
     hidden: yes
