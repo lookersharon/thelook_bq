@@ -194,6 +194,11 @@ view: events {
     drill_fields: [visitors*]
   }
 
+  measure: sum_test {
+    type: sum
+    sql: ${session_id} ;;
+  }
+
   set: simple_page_info {
     fields: [event_id, event_time, event_type, full_page_url, user_id, funnel_step]
   }

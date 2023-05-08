@@ -77,6 +77,20 @@ view: sessions {
     value_format_name: decimal_2
     sql: ${duration} ;;
   }
+  measure: total_duration {
+    label: "Total Duration (sec)"
+    type: sum
+    value_format_name: decimal_2
+    sql: ${duration} ;;
+  }
+
+  measure: average_duration_fanout {
+    label: "Average Duration (No Sym Agg)"
+    type: average
+    fanout_on: "session_id"
+    value_format_name: decimal_2
+    sql: ${duration} ;;
+  }
 
   dimension: duration_seconds_tier {
     label: "Duration Tier (sec)"

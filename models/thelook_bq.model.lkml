@@ -77,6 +77,19 @@ explore: order_items {
     sql_on: ${distribution_centers.id} = ${inventory_items.product_distribution_center_id} ;;
     relationship: many_to_one
   }
+
+
+
+  join: last_year_sales {
+    sql_on: ${last_year_sales.products_sku} = ${products.sku}
+AND ${last_year_sales.users_city} = ${users.city}
+AND ${last_year_sales.users_age_tier} = ${users.age_tier}
+AND ${last_year_sales.users_gender_short} = ${users.gender_short}
+AND ${last_year_sales.users_traffic_source} = ${users.traffic_source};;
+type: left_outer
+relationship: many_to_one
+
+  }
   #roll up table for commonly used queries
   # aggregate_table: simple_rollup {
   #   query: {
@@ -152,8 +165,10 @@ explore: events {
 explore: sessions {
   label: "(3) Web Session Data"
   # sql_always_where: ${product_viewed.brand} in ({{ _user_attributes['brand'] }}) ;;
+  # symmetric_aggregates: no
 
   join: events {
+
     view_label: "Events"
     type: left_outer
     sql_on: ${sessions.session_id} = ${events.session_id} ;;
