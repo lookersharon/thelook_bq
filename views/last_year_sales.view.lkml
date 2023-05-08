@@ -49,11 +49,11 @@ view: last_year_sales {
 
 dimension: created_at_year {
   type: string
-  sql: DATE_TRUNC(${TABLE}.created_at,YEAR) ;;
+  sql:  EXTRACT(YEAR FROM ${TABLE}.created_at) ;;
 }
   dimension: created_at_last_year {
     type: string
-    sql: DATE_TRUNC(${TABLE}.created_at, YEAR)+1;;
+    sql:  EXTRACT(YEAR FROM ${TABLE}.created_at)-1;;
   }
 
   measure: count {
@@ -120,13 +120,13 @@ sql: ${order_items_total_sale_price} ;;
   measure: sum_growth_rate {
     type: sum
     # value_format_name: percent_0
-    sql: (${order_items_total_sale_price}-${last_year_sales.order_items_total_sale_price})/${last_year_sales.order_items_total_sale_price} ;;
+    sql: (${order_items_total_sale_price}-${last_year_sales.order_items_total_sale_price})/nullif(${last_year_sales.order_items_total_sale_price},0) ;;
   }
 
   measure: growth_rate {
     type: average
     # value_format_name: percent_0
-    sql: (${order_items_total_sale_price}-${last_year_sales.order_items_total_sale_price})/${last_year_sales.order_items_total_sale_price} ;;
+    sql: (${order_items_total_sale_price}-${last_year_sales.order_items_total_sale_price})/nullif(${last_year_sales.order_items_total_sale_price},0) ;;
   }
 
   set: detail {
