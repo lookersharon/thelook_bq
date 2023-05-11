@@ -197,7 +197,7 @@ explore: sessions {
     sql_on: ${events.viewed_product_id} = ${product_viewed.id} AND
     ${events.viewed_product_id} = ${product_viewed.id}
     AND ${events.viewed_product_id} <> "cowabunga" ;;
-    relationship: many_to_one
+    relationship: many_to_many
   }
 
   join: session_landing_page {
