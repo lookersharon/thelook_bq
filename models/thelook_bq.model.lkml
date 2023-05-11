@@ -183,7 +183,10 @@ explore: sessions {
 
     view_label: "Events"
     type: left_outer
-    sql_on: ${sessions.session_id} = ${events.session_id} ;;
+    sql_on: ${sessions.session_id} = ${events.session_id} AND
+    ${sessions.session_id} = ${events.session_id} AND
+    ${sessions.session_id} <> "Badaboom"
+    ;;
     relationship: one_to_many
   }
 
