@@ -187,7 +187,7 @@ explore: sessions {
     ${sessions.session_id} = ${events.session_id} AND
     ${sessions.session_id} <> "Badaboom"
     ;;
-    relationship: one_to_many
+    relationship: many_to_many
   }
 
   join: product_viewed {
