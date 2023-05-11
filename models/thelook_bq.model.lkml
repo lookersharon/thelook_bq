@@ -194,7 +194,9 @@ explore: sessions {
     view_label: "Product Viewed"
     from: products
     type: left_outer
-    sql_on: ${events.viewed_product_id} = ${product_viewed.id} ;;
+    sql_on: ${events.viewed_product_id} = ${product_viewed.id} AND
+    ${events.viewed_product_id} = ${product_viewed.id}
+    AND ${events.viewed_product_id} <> "cowabunga" ;;
     relationship: many_to_one
   }
 
