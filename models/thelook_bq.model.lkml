@@ -112,8 +112,8 @@ AND ${last_year_sales.users_city} = ${this_year_sales.users_city}
 AND ${last_year_sales.users_age_tier} = ${this_year_sales.users_age_tier}
 AND ${last_year_sales.users_gender_short} = ${this_year_sales.users_gender_short}
 AND ${last_year_sales.users_traffic_source} =${this_year_sales.users_traffic_source}
-AND ${last_year_sales.created_at_last_year} = ${this_year_sales.created_at_year};;
-type: left_outer
+AND ${last_year_sales.created_at_year} = ${this_year_sales.created_at_last_year};;
+type: inner
 relationship: one_to_one
 
 }

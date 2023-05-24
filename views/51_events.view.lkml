@@ -189,7 +189,7 @@ view: events {
     type: number
     hidden: yes
     description: "Uniqueness determined by IP Address and User Login"
-    sql: count (distinct ${ip}) / 1000.0 ;;
+    sql: count (distinct ${ip} / 1000.0 ;;
     value_format: "#.### \"k\""
     drill_fields: [visitors*]
   }

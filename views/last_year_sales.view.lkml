@@ -32,7 +32,7 @@ view: last_year_sales {
           ROW_NUMBER() OVER (ORDER BY products.sku) as pk,
           LOWER(SUBSTR(users.gender,1,1))  AS users_gender_short,
           COUNT(DISTINCT order_items.order_id ) AS order_items_order_count,
-          COALESCE(SUM(order_items.sale_price ), 0) AS order_items_total_sale_price
+          COALESCE(SUM(order_items.sale_price*(90 + RAND() * (10))), 0) AS order_items_total_sale_price
       FROM looker-private-demo.ecomm.order_items  AS order_items
       FULL OUTER JOIN looker-private-demo.ecomm.inventory_items  AS inventory_items ON inventory_items.id = order_items.inventory_item_id
       LEFT JOIN looker-private-demo.ecomm.users  AS users ON order_items.user_id = users.id
@@ -125,7 +125,7 @@ sql: ${order_items_total_sale_price} ;;
 
   measure: growth_rate {
     type: average
-    # value_format_name: percent_0
+    value_format_name: percent_0
     sql: (${order_items_total_sale_price}-${last_year_sales.order_items_total_sale_price})/nullif(${last_year_sales.order_items_total_sale_price},0) ;;
   }
 

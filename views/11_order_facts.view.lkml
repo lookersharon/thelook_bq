@@ -38,6 +38,12 @@ view: order_facts {
     sql: ${TABLE}.order_amount ;;
   }
 
+  measure: discount_percent {
+    type: number
+    value_format_name: percent_0
+    sql: (${order_amount}-${discounts.retail_price})/${discounts.retail_price} ;;
+  }
+
   dimension: order_cost {
     label: "Order Cost"
     type: number
