@@ -538,6 +538,13 @@ dimension: has_discount {
     }
 
 
+    measure: rate_simple_division_with_sum_over_sum
+    {
+      group_label: "rate metrics"
+      type: number
+      sql: ${returned_total_sale_price}/${total_sale_price} ;;
+
+    }
 
 
 ########## Sets ##########
