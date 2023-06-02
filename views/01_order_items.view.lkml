@@ -339,14 +339,14 @@ view: order_items {
     label: "Total Gross Margin Percentage"
     type: number
     value_format_name: percent_2
-    sql: 1.0 * ${total_gross_margin}/ nullif(${total_sale_price},0) ;;
+    sql: ${total_gross_margin}/ ${total_sale_price} ;;
   }
 
   measure: average_spend_per_user {
     label: "Average Spend per User"
     type: number
     value_format_name: usd
-    sql: 1.0 * ${total_sale_price} / nullif(${users.count},0) ;;
+    sql: ${total_sale_price} / ${users.count} ;;
     drill_fields: [detail*]
   }
 
