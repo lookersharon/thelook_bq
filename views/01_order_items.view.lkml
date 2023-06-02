@@ -504,7 +504,7 @@ dimension: has_discount {
 
 #### rate measures testing
 
-    measure: rate_simple_division
+    measure: rate_simple_division_sum_over_count_distinct
     {
       group_label: "rate metrics"
       type: number
@@ -513,11 +513,27 @@ dimension: has_discount {
     }
 
 
-    measure: rate_simple_division_with_nullif
+    measure: rate_simple_division_with_nullif_sum_over_count_distinct
     {
       group_label: "rate metrics"
       type: number
       sql: ${total_sale_price}/nullif(${order_count},0) ;;
+
+    }
+    measure: rate_simple_division_sum_over_count
+    {
+      group_label: "rate metrics"
+      type: number
+      sql: ${total_sale_price}/${count} ;;
+
+    }
+
+
+    measure: rate_simple_division_with_nullif_sum_over_count
+    {
+      group_label: "rate metrics"
+      type: number
+      sql: ${total_sale_price}/nullif(${count},0) ;;
 
     }
 
