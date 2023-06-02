@@ -506,6 +506,7 @@ dimension: has_discount {
 
     measure: rate_simple_division
     {
+      group_label: "rate metrics"
       type: number
       sql: ${total_sale_price}/${order_count} ;;
 
@@ -514,6 +515,7 @@ dimension: has_discount {
 
     measure: rate_simple_division_with_nullif
     {
+      group_label: "rate metrics"
       type: number
       sql: ${total_sale_price}/nullif(${order_count},0) ;;
 
