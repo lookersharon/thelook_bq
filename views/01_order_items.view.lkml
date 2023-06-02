@@ -339,7 +339,7 @@ view: order_items {
     label: "Total Gross Margin Percentage"
     type: number
     value_format_name: percent_2
-    sql: ${total_gross_margin}/ ${total_sale_price} ;;
+    sql: ${total_gross_margin}/ nullif(${total_sale_price},0) ;;
   }
 
   measure: average_spend_per_user {
