@@ -384,7 +384,7 @@ view: order_items {
     label: "Return Rate"
     type: number
     value_format_name: percent_2
-    sql: 1.0 * ${returned_count} / nullif(${count},0) ;;
+    sql: ${returned_count} / ${count} ;;
     html: {{link}} ;;
   }
 
