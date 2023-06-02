@@ -502,6 +502,26 @@ dimension: has_discount {
 }
 
 
+#### rate measures testing
+
+    measure: rate_simple_division
+    {
+      type: number
+      sql: ${total_sale_price}/${order_count} ;;
+
+    }
+
+
+    measure: rate_simple_division_with_nullif
+    {
+      type: number
+      sql: ${total_sale_price}/nullif(${order_count},0) ;;
+
+    }
+
+
+
+
 ########## Sets ##########
 
   set: detail {
