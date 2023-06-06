@@ -117,6 +117,22 @@ sql: ${order_items_total_sale_price} ;;
     sql: ${TABLE}.order_items_total_sale_price ;;
   }
 
+  measure: sum_total_sale_price {
+    type: sum
+    sql: ${order_items_total_sale_price} ;;
+  }
+
+
+  measure: sum_total_sale_price_change {
+    type: sum
+    sql: ${sum_total_sale_price} -${last_year_sales.sum_total_sale_price} ;;
+  }
+
+  measure: rate_growth_yoy {
+    type: number
+    sql: ${sum_total_sale_price_change}/nullif(${last_year_sales.order_items_total_sale_price},0) ;;
+  }
+
   measure: sum_growth_rate {
     type: sum
     # value_format_name: percent_0
