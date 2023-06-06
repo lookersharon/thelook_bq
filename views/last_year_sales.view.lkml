@@ -135,10 +135,12 @@ sql: ${order_items_total_sale_price} ;;
 
   measure: rate_growth_yoy {
     type: number
+    value_format_name: percent_2
     sql: ${sum_total_sale_price_change}/nullif(${last_year_sales.sum_total_sale_price},0) ;;
   }
   measure: inline_rate_growth_yoy {
     type: number
+    value_format_name: percent_2
     sql: ${inline_sum_total_sale_price_change}/nullif(${last_year_sales.sum_total_sale_price},0) ;;
   }
 
