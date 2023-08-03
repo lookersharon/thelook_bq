@@ -31,7 +31,7 @@ view: users {
 
   dimension: name_secure {
     sql: ${name};;
-    required_access_grants: [can_see_sensitive_data]
+    # required_access_grants: [can_see_sensitive_data]
   }
 
   dimension: age {
