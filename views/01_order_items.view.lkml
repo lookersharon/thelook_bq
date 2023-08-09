@@ -280,12 +280,18 @@ view: order_items {
     sql: ${sale_price} - ${inventory_items.cost};;
   }
 
-  dimension: item_gross_margin_percentage {
-    label: "Item Gross Margin Percentage"
-    type: number
-    value_format_name: percent_2
-    sql: 1.0 * ${gross_margin}/NULLIF(${sale_price},0) ;;
-  }
+    dimension: item_gross_margin_percentage {
+      label: "Item Gross Margin Percentage"
+      type: number
+      value_format_name: percent_2
+      sql: 1.0 * ${gross_margin}/NULLIF(${sale_price},0) ;;
+    }
+    dimension:safe_divide_gross_margin_percentage {
+      label: "Safe Divide Item Gross Margin Percentage"
+      type: number
+      value_format_name: percent_2
+      sql: SAFE_DIVIDE(${gross_margin},${sale_price}) ;;
+    }
 
   dimension: item_gross_margin_percentage_tier {
     label: "Item Gross Margin Percentage Tier"
