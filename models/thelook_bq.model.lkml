@@ -14,10 +14,10 @@ datagroup: ecommerce_etl {
 persist_with: ecommerce_etl
 ############ Base Explores #############
 
-access_grant: can_see_sensitive_data {
-  user_attribute: can_see_sensitive_data
-  allowed_values: ["Yes"]
-}
+# access_grant: can_see_sensitive_data {
+#   user_attribute: can_see_sensitive_data
+#   allowed_values: ["Yes"]
+# }
 
 explore: order_items {
   label: "(1) Orders, Items and Users"
@@ -371,7 +371,7 @@ explore: kmeans_model5 {}
 
 explore: ecomm_predict {
   label: "(8) Cohort Analysis"
-  fields: [ALL_FIELDS*,-centroid_id, -user_id]
+  fields: [ALL_FIELDS*, -order_facts.discount_percent, -centroid_id, -user_id]
   join: users {
     type: left_outer
     relationship: many_to_one

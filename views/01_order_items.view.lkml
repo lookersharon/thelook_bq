@@ -31,9 +31,23 @@ view: order_items {
     drill_fields: [detail*]
   }
 
+  measure: total_sale_price {
+    label: "Total Sale Price"
+    type: sum
+    value_format_name: usd
+    sql: ${sale_price} ;;
+    drill_fields: [detail*]
+  }
+
   measure: ratio {
     type: number
     sql: ${total_sale_price}/nullif(${count},0) ;;
+    value_format_name: decimal_4
+  }
+
+  measure: safe_divideratio {
+    type: number
+    sql: safe_divide(${total_sale_price},${count}) ;;
     value_format_name: decimal_4
   }
 
@@ -196,6 +210,14 @@ view: order_items {
 
   }
 
+
+    dimension_group: created_just_month {
+      type: time
+      timeframes: [month, year, hour_of_day, day_of_week, month_num, raw, week_of_year,month_name]
+      sql: ${TABLE}.created_at ;;
+
+    }
+
   dimension: reporting_period {
     group_label: "Order Date"
     sql: CASE
@@ -301,13 +323,7 @@ view: order_items {
     style: interval
   }
 
-  measure: total_sale_price {
-    label: "Total Sale Price"
-    type: sum
-    value_format_name: usd
-    sql: ${sale_price} ;;
-    drill_fields: [detail*]
-  }
+
 
   measure: total_gross_margin {
     label: "Total Gross Margin"
